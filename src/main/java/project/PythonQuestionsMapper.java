@@ -10,9 +10,9 @@ import java.io.IOException;
 public class PythonQuestionsMapper extends Mapper<LongWritable, Text, Text, Text> {
     private Text link = new Text();
     private  Text outkey = new Text();
+    private static int count = 0;
 
     public void map(LongWritable key, Text text, Context context) throws IOException, InterruptedException {
-        if (key.get() > 0) {
             CSVParser parser = new CSVParser();
             String[] lines = parser.parseLineMulti(text.toString());
             if (lines.length == 0)
@@ -21,9 +21,18 @@ public class PythonQuestionsMapper extends Mapper<LongWritable, Text, Text, Text
             String body = lines[lines.length - 1];
             String rawBody = removeHTMLFromString(body.toLowerCase());
             String bodyChars = rawBody.replaceAll("'","").replaceAll("\n", " ").replaceAll("[^a-zA-Z]", " ");
-            for (String word: bodyChars.split("\\s+")) {
+            if(count < 5 && lines.length == 5){
                 System.out.println("Id: " + id);
-                System.out.println("Word: " + word);
+                System.out.println("OwnerUserId: " + lines[1]);
+                System.out.println("CreationDate: " + lines[2]);
+                System.out.println("Score: " + lines[3]);
+                System.out.println("Title: " + lines[4]);
+                System.out.println("Body: " + bodyChars);
+            }
+            count ++;
+            for (String word: bodyChars.split("\\s+")) {
+//                System.out.println("Id: " + id);
+//                System.out.println("Word: " + word);
                 if (word.length() > 0) {
                     if (word.charAt(0) == 'j') {
                         link.set(word);
@@ -32,7 +41,6 @@ public class PythonQuestionsMapper extends Mapper<LongWritable, Text, Text, Text
                     }
                 }
             }
-        }
     }
 
 //    public void map(Text text) throws IOException, InterruptedException {
@@ -40,8 +48,8 @@ public class PythonQuestionsMapper extends Mapper<LongWritable, Text, Text, Text
 //        String[] lines = parser.parseLineMulti(text.toString());
 //        if (lines.length == 0)
 //            return;
-//        String id = lines[1];
-//        String body = lines[lines.length - 1];
+//        String id = lines[0];
+//        String body = lines[5];
 //        String rawBody = removeHTMLFromString(body.toLowerCase());
 //        String bodyChars = rawBody.replaceAll("'","").replaceAll("\n", " ").replaceAll("[^a-zA-Z]", " ");
 //        for (String word: bodyChars.split("\\s+")) {

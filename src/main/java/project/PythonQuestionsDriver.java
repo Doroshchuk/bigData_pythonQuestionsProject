@@ -45,7 +45,7 @@ public class PythonQuestionsDriver {
 
         // Specify key / value
         job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(WordQuestionsIdTuple.class);
+        job.setOutputValueClass(Text.class);
 
 //        // Delete output if exists
 //        FileSystem hdfs = FileSystem.get(conf);
