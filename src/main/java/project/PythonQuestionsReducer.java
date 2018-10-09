@@ -19,6 +19,6 @@ public class PythonQuestionsReducer extends Reducer<Text, Text, Text, Text> {
         }
 
         result.set(stringBuilder.toString());
-        context.write(new Text("Id: " + key), new Text("Word: " + result));
+        context.write(key, result);
     }
 }

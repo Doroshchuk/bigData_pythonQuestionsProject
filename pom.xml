@@ -6,6 +6,11 @@
     <groupId>bigData</groupId>
     <artifactId>pythonQuestionsProject</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <hadoop-version>2.9.0</hadoop-version>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -57,13 +62,33 @@
     <dependencies>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-client</artifactId>
-            <version>2.7.5</version>
+            <artifactId>hadoop-common</artifactId>
+            <version>${hadoop-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-hdfs</artifactId>
+            <version>${hadoop-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-mapreduce-client-core</artifactId>
+            <version>${hadoop-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-mapreduce-client-common</artifactId>
+            <version>${hadoop-version}</version>
         </dependency>
         <dependency>
             <groupId>com.opencsv</groupId>
             <artifactId>opencsv</artifactId>
-            <version>3.3</version>
+            <version>4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>in.ashwanthkumar</groupId>
+            <artifactId>hadoop2-csv</artifactId>
+            <version>2.0</version>
         </dependency>
     </dependencies>
 </project>
